@@ -1,0 +1,16 @@
+[project]
+name = "ai-ipl-engine"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "asyncio>=4.0.0",
+    "fastapi>=0.135.3",
+    "langgraph>=1.1.6",
+    "litellm>=1.83.4",
+    "python-dotenv>=1.0.1",
+    "qdrant-client>=1.17.1",
+    "redis>=7.4.0",
+    "uvicorn>=0.44.0",
+]
