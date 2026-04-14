@@ -1,5 +1,6 @@
 import json
 from app.db.redis import redis_client
+from app.engine.main import process_event
 
 async def consume():
     last_id = "0"
@@ -13,5 +14,6 @@ async def consume():
         for _, msgs in events:
             for msg_id, data in msgs:
                 event = json.loads(data["data"])
-                print("EVENT:", event)
+                result = await process_event(event)
+                print("🔥 OUTPUT:", result)
                 last_id = msg_id
