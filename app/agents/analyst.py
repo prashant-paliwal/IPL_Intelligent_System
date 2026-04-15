@@ -1,11 +1,16 @@
 import textwrap
 from app.tools.llm import call_llm
+from app.agents.memory import run as memory_agent
 
 def run(state, features):
+    memories = memory_agent(state, features)
+
+    memory_text = "\n".join(memories) if memories else "No data"
+
     prompt = textwrap.dedent(f"""
         You are a cricket analyst.
 
-        Match Context:
+        Match:
         Score: {state.score}/{state.wickets}
         Overs: {state.over}
 
@@ -15,9 +20,12 @@ def run(state, features):
         Pressure: {features['pressure']}
         Phase: {features['phase']}
 
+        Historical Context:
+        {memory_text}
+
         Instructions:
-        - Give 1 short tactical insight
-        - Be sharp and analytical
+        - Use memory if useful
+        - Give 1 sharp insight
     """).strip()
 
     return call_llm(prompt)

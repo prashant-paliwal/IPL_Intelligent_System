@@ -1,7 +1,12 @@
 import textwrap
 from app.tools.llm import call_llm
+from app.agents.memory import run as memory_agent
 
 def run(state, features):
+    memories = memory_agent(state, features)
+    
+    memory_text = "\n".join(memories) if memories else "No historical insights"
+
     prompt = textwrap.dedent(f"""
         You are a professional IPL commentator.
 
@@ -17,10 +22,13 @@ def run(state, features):
         Pressure: {features['pressure']}
         Phase: {features['phase']}
 
+        Historical Insights:
+        {memory_text}
+
         Instructions:
-        - Write 1 short exciting line
-        - No explanation
-        - Natural commentary style
+        - Use historical insights if relevant
+        - Keep it short (1 line)
+        - Sound natural and exciting
     """).strip()
 
     return call_llm(prompt)
