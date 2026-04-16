@@ -1,0 +1,62 @@
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial;
+    background: linear-gradient(135deg, #020617, #0f172a);
+    color: #fff;
+}
+
+header {
+    padding: 20px;
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+    background: #020617;
+    border-bottom: 1px solid #1e293b;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+}
+
+.scoreboard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.team { font-size: 20px; font-weight: bold; }
+.score { font-size: 28px; font-weight: bold; color: #22c55e; }
+.meta { font-size: 14px; color: #94a3b8; }
+
+.btn {
+    padding: 12px 20px;
+    background: #22c55e;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.card {
+    background: #1e293b;
+    padding: 15px;
+    border-radius: 12px;
+}
+
+.title { font-size: 14px; color: #94a3b8; }
+.text { font-size: 15px; }
+
+.hype { color: #facc15; font-weight: bold; }
+.prediction { color: #22c55e; font-weight: bold; }

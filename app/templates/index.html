@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IPL AI Engine</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+
+<header>🏏 IPL AI Commentary Engine</header>
+
+<div class="container">
+
+    <div class="scoreboard">
+        <div>
+            <div class="team">RCB</div>
+            <div class="meta">Kohli on strike</div>
+        </div>
+
+        <div class="score" id="score">0/0</div>
+
+        <div>
+            <div class="team">MI</div>
+            <div class="meta" id="over">0.0 overs</div>
+        </div>
+    </div>
+
+    <button class="btn" onclick="sendEvent()">▶ Simulate Ball</button>
+
+    <div class="grid" id="output"></div>
+
+</div>
+
+<script src="/static/js/app.js"></script>
+
+</body>
+</html>
