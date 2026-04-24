@@ -2,7 +2,7 @@ import textwrap
 from app.tools.llm import call_llm
 from app.agents.memory import run as memory_agent
 
-def run(state, features):
+async def run(state, features):
     memories = memory_agent(state, features)
 
     memory_text = "\n".join(memories) if memories else "No data"
@@ -28,4 +28,4 @@ def run(state, features):
         - Give 1 sharp insight
     """).strip()
 
-    return call_llm(prompt)
+    return await call_llm(prompt)

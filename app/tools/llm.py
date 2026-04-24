@@ -5,13 +5,13 @@ load_dotenv()
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
-from litellm import completion, embedding
+from litellm import acompletion, embedding
 
 
 MODEL = "gpt-4o-mini"
 
-def call_llm(prompt: str) -> str:
-    response = completion(
+async def call_llm(prompt: str) -> str:
+    response = await acompletion(
         model=MODEL,
         messages=[{"role": "user", "content": prompt}],
         temperature=0.7,
@@ -19,8 +19,8 @@ def call_llm(prompt: str) -> str:
     )
     return response["choices"][0]["message"]["content"]
 
-def get_embedding(text: str):
-    res = embedding(
+async def get_embedding(text: str):
+    res = await embedding(
         model="text-embedding-3-small",
         input=text
     )

@@ -1,7 +1,7 @@
 import textwrap
 from app.tools.llm import call_llm
 
-def run(state, features):
+async def run(state, features):
     prompt = textwrap.dedent(f"""
         You are a hype IPL commentator.
 
@@ -14,4 +14,4 @@ def run(state, features):
         - 1 short line
     """).strip()
 
-    return call_llm(prompt)
+    return await call_llm(prompt)

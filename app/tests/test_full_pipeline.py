@@ -5,9 +5,11 @@ sys.path.append(
         os.path.dirname(os.path.dirname(__file__))
     )
 )
+
+import asyncio
 from app.engine.orchestrator import process_event
 
-def test_pipeline():
+async def test_pipeline():
     events = [
         {"runs": 4, "batsman": "Kohli", "bowler": "Bumrah"},
         {"runs": 6, "batsman": "Kohli", "bowler": "Bumrah"},
@@ -15,9 +17,9 @@ def test_pipeline():
     ]
 
     for e in events:
-        result = process_event(e)
-        print("\n RESULT:\n", result)
+        result = await process_event(e)   # await here
+        print("\n🔥 RESULT:\n", result)
 
 
 if __name__ == "__main__":
-    test_pipeline()
+    asyncio.run(test_pipeline())
