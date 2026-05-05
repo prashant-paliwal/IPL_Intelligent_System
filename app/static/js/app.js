@@ -1,59 +1,67 @@
-let score = 0;
-let wickets = 0;
-let balls = 0;
+let interval = null;
+let isRunning = false;
 
-async function sendEvent() {
+async function playBall() {
+    try {
+        const res = await fetch("/event", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({})
+        });
 
-    const runs = Math.floor(Math.random() * 7);
+        const data = await res.json();
 
-    if (runs === 0 && Math.random() > 0.7) {
-        wickets += 1;
-    } else {
-        score += runs;
+        // --- STATE (from backend) ---
+        document.getElementById("score").innerText =
+            `${data.state.score}/${data.state.wickets}`;
+
+        document.getElementById("over").innerText =
+            `${data.state.over} overs`;
+
+        // --- METRICS ---
+        document.getElementById("rr").innerText =
+            data.features?.run_rate?.toFixed(2) || "0.00";
+
+        document.getElementById("pressure").innerText =
+            data.features?.pressure || "-";
+
+        document.getElementById("win").innerText =
+            data.prediction?.win_probability || "-";
+
+        // --- ANIMATION (fade) ---
+        const commentaryEl = document.getElementById("commentary");
+        commentaryEl.style.opacity = 0;
+
+        setTimeout(() => {
+            commentaryEl.innerText = data.commentary;
+            commentaryEl.style.opacity = 1;
+        }, 200);
+
+        document.getElementById("analysis").innerText =
+            data.analysis || "-";
+
+        document.getElementById("hype").innerText =
+            data.hype || "-";
+
+        document.getElementById("prediction").innerText =
+            `Next: ${data.prediction?.next_ball || "-"}`;
+
+    } catch (err) {
+        console.error(err);
     }
+}
 
-    balls += 1;
+function startMatch() {
+    if (isRunning) return;
 
-    const res = await fetch("/event", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({
-            runs: runs,
-            batsman: "Kohli",
-            bowler: "Bumrah"
-        })
-    });
+    isRunning = true;
 
-    const data = await res.json();
+    interval = setInterval(() => {
+        playBall();
+    }, 1500); // every 1.5 sec
+}
 
-    document.getElementById("score").innerText =
-        `${score}/${wickets}`;
-
-    document.getElementById("over").innerText =
-        `${(balls/6).toFixed(1)} overs`;
-
-    document.getElementById("output").innerHTML = `
-        <div class="card">
-            <div class="title">🎙 Commentary</div>
-            <div class="text">${data.commentary}</div>
-        </div>
-
-        <div class="card">
-            <div class="title">📊 Analysis</div>
-            <div class="text">${data.analysis}</div>
-        </div>
-
-        <div class="card">
-            <div class="title">🔥 Hype</div>
-            <div class="text hype">${data.hype}</div>
-        </div>
-
-        <div class="card">
-            <div class="title">📈 Prediction</div>
-            <div class="text prediction">
-                Win: ${data.prediction.win_probability}<br>
-                Next: ${data.prediction.next_ball}
-            </div>
-        </div>
-    `;
+function stopMatch() {
+    clearInterval(interval);
+    isRunning = false;
 }

@@ -1,62 +1,121 @@
 body {
     margin: 0;
-    font-family: "Segoe UI", Arial;
-    background: linear-gradient(135deg, #020617, #0f172a);
-    color: #fff;
+    font-family: "Inter", Arial;
+    background: #f6f8fb;
+    color: #1e293b;
 }
 
+/* Header */
 header {
-    padding: 20px;
+    padding: 16px;
+    background: white;
+    border-bottom: 1px solid #e2e8f0;
+    font-weight: 600;
     text-align: center;
-    font-size: 26px;
-    font-weight: bold;
-    background: #020617;
-    border-bottom: 1px solid #1e293b;
+    font-size: 20px;
 }
 
+.live-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: red;
+    border-radius: 50%;
+    margin-left: 8px;
+}
+
+/* Layout */
 .container {
-    max-width: 1000px;
+    max-width: 1100px;
     margin: auto;
     padding: 20px;
 }
 
+/* Scoreboard */
 .scoreboard {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    background: #1e293b;
+    background: white;
     padding: 20px;
     border-radius: 12px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-.team { font-size: 20px; font-weight: bold; }
-.score { font-size: 28px; font-weight: bold; color: #22c55e; }
-.meta { font-size: 14px; color: #94a3b8; }
+.team { font-weight: 600; }
+.score { font-size: 28px; font-weight: bold; color: #2563eb; }
+.meta { font-size: 13px; color: #64748b; }
+
+/* Metrics */
+.metrics {
+    display: flex;
+    gap: 10px;
+}
+
+.metric {
+    flex: 1;
+    background: white;
+    padding: 12px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.label { font-size: 12px; color: #64748b; }
+.value { font-size: 18px; font-weight: bold; }
+
+.highlight { color: #16a34a; }
+
+/* Button */
+.action {
+    margin: 20px 0;
+}
 
 .btn {
-    padding: 12px 20px;
-    background: #22c55e;
+    padding: 12px 18px;
+    background: #2563eb;
+    color: white;
     border: none;
     border-radius: 8px;
     cursor: pointer;
 }
 
+/* Main commentary */
+.main-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+.big-text {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+/* Grid */
 .grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
-    margin-top: 20px;
 }
 
 .card {
-    background: #1e293b;
+    background: white;
     padding: 15px;
     border-radius: 12px;
 }
 
-.title { font-size: 14px; color: #94a3b8; }
-.text { font-size: 15px; }
+.title {
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 6px;
+}
 
-.hype { color: #facc15; font-weight: bold; }
-.prediction { color: #22c55e; font-weight: bold; }
+.text { font-size: 14px; }
+
+.hype { color: #f59e0b; }
+.prediction { color: #16a34a; }
+
+#commentary {
+    transition: opacity 0.3s ease;
+}

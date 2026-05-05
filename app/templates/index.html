@@ -7,14 +7,18 @@
 
 <body>
 
-<header>🏏 IPL AI Commentary Engine</header>
+<header>
+    🏏 IPL AI Commentary
+    <span class="live-dot"></span>
+</header>
 
 <div class="container">
 
+    <!-- Scoreboard -->
     <div class="scoreboard">
         <div>
             <div class="team">RCB</div>
-            <div class="meta">Kohli on strike</div>
+            <div class="meta">Kohli vs Bumrah</div>
         </div>
 
         <div class="score" id="score">0/0</div>
@@ -25,9 +29,57 @@
         </div>
     </div>
 
-    <button class="btn" onclick="sendEvent()">▶ Simulate Ball</button>
+    <!-- Metrics -->
+    <div class="metrics">
+        <div class="metric">
+            <div class="label">Run Rate</div>
+            <div class="value" id="rr">0.0</div>
+        </div>
 
-    <div class="grid" id="output"></div>
+        <div class="metric">
+            <div class="label">Pressure</div>
+            <div class="value" id="pressure">-</div>
+        </div>
+
+        <div class="metric">
+            <div class="label">Win %</div>
+            <div class="value highlight" id="win">0</div>
+        </div>
+    </div>
+
+    <!-- Action -->
+    <div class="action">
+        <button class="btn" onclick="startMatch()">▶ Start Match</button>
+        <button class="btn" onclick="stopMatch()">⏸ Stop</button>
+    </div>
+
+    <!-- Commentary (Main Focus) -->
+    <div class="main-card">
+        <div class="title">🎙 Live Commentary</div>
+        <div class="big-text" id="commentary">
+            Waiting for first ball...
+        </div>
+    </div>
+
+    <!-- Secondary Data -->
+    <div class="grid">
+
+        <div class="card">
+            <div class="title">📊 Analysis</div>
+            <div class="text" id="analysis">-</div>
+        </div>
+
+        <div class="card">
+            <div class="title">🔥 Hype</div>
+            <div class="text hype" id="hype">-</div>
+        </div>
+
+        <div class="card">
+            <div class="title">📈 Prediction</div>
+            <div class="text prediction" id="prediction">-</div>
+        </div>
+
+    </div>
 
 </div>
 
